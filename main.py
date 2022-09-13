@@ -56,22 +56,22 @@ def get_infos(dicio, manager_df):
 
 def send_email(dn, manager_email):
     password = 'password'
-    de = 'email'
-    para = manager_email
+    sender = 'email'
+    to = manager_email
     subject = 'Solicitud de Aprobación'
     message = f'Hola!\n Considerando que para "{dn}" hay una clasificacion high, solicito su aprobación.'
 
     email = EmailMessage()
-    email['To'] = para
-    email['From'] = de
+    email['To'] = to
+    email['From'] = sender
     email['Subject'] = subject
     email.set_content(message)
 
     context = ssl.create_default_context()
 
     with smtplib.SMTP_SSL('smtp.gmail.com: 465') as smtp:
-        smtp.login(de, password)
-        smtp.sendmail(de, para, email.as_string())
+        smtp.login(sender, password)
+        smtp.sendmail(sender, to, email.as_string())
 
 def main():
     #Read json
